@@ -141,7 +141,7 @@ import java.util.Scanner;
 			Mygame.Displayboard();
 			if(Mygame.checkcolwin() || Mygame.checkrowwin() || Mygame.checkdigwin())
 			{
-				System.out.println(cp.name+" Congratulations you won");
+				System.out.println(cp.name+" won congratulations");
 				break;
 			}
 			else
