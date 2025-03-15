@@ -80,9 +80,7 @@ import java.util.Scanner;
 				return true;
 			}
 			return false;
-		}
-		
-		
+		}	
 }	
 			
 		
@@ -122,39 +120,46 @@ import java.util.Scanner;
 			
 	}
 	
-	
-	
 	public class LaunchGame {
-	public static void main(String[] args) {
-		Mygame b=new Mygame();
-		
-		HumanPlayer p1=new HumanPlayer("Player 1",'X');
-		HumanPlayer p2=new HumanPlayer("Player 2",'O');
-		
-		HumanPlayer cp;
-		cp=p1;
-		
-		while(true)
-		{
-			System.out.println(cp.name+": Your TURN");
-			cp.move();
-			Mygame.Displayboard();
-			if(Mygame.checkcolwin() || Mygame.checkrowwin() || Mygame.checkdigwin())
-			{
-				System.out.println(cp.name+" won congratulations");
-				break;
-			}
-			else
-			{
-				if(cp==p1)
-				{
-					cp=p2;
-				}
-				else
-				{
-					cp=p1;
-				}
-			}
+	    public static void main(String[] args) {
+	        Mygame b = new Mygame();
+
+	        HumanPlayer p1 = new HumanPlayer("Player 1", 'X');
+	        HumanPlayer p2 = new HumanPlayer("Player 2", 'O');
+
+	        HumanPlayer cp = p1;
+
+	        while (true) {
+	            System.out.println(cp.name + ": Your TURN");
+	            cp.move();
+	            Mygame.Displayboard();
+
+	            // Check for a winner
+	            if (Mygame.checkcolwin() || Mygame.checkrowwin() || Mygame.checkdigwin()) {
+	                System.out.println(cp.name + " won! Congratulations");
+	                break;
+	            }
+
+	            // Check for a draw
+	            if (isBoardFull()) {
+	                System.out.println("Game is a draw!");
+	                break;
+	            }
+
+	            // Switch player turn
+	            cp = (cp == p1) ? p2 : p1;
+	        }
+	    }
+
+	    // Method to check if the board is full
+	    public static boolean isBoardFull() {
+	        for (int row = 0; row < Mygame.board.length; row++) {
+	            for (int col = 0; col < Mygame.board[row].length; col++) {
+	                if (Mygame.board[row][col] == ' ') {
+	                    return false;  // Found an empty space, game continues
+	                }
+	            }
+	        }
+	        return true;  // No empty spaces left, it's a draw
 	    }
 	}
-}
